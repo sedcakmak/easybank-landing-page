@@ -4,14 +4,14 @@ import { ReactComponent as Close } from "../images/icon-close.svg";
 import MainNavBar from "./MainNavBar";
 
 export default function MobileNavBar() {
-  const [isNavBarOpen, setIsNavBarOpen] = useState(true);
+  const [isNavBarOpen, setIsNavBarOpen] = useState(false);
 
   useEffect(() => {
     console.log("click working");
   }, [isNavBarOpen]);
   return (
     <>
-      <Hamburger onClick={() => setIsNavBarOpen(!isNavBarOpen)} />
+      <Hamburger onClick={() => setIsNavBarOpen(true)} />
       {isNavBarOpen && <Close />}
     </>
 

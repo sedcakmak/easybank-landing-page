@@ -1,4 +1,7 @@
+import { useState } from "react";
 import styled from "styled-components";
+import { ReactComponent as Hamburger } from "../images/icon-hamburger.svg";
+import { ReactComponent as Close } from "../images/icon-close.svg";
 
 const Ul = styled.ul`
   list-style-type: none;
@@ -38,14 +41,50 @@ const Li = styled.li`
   }
 `;
 
+const WrapperDiv = styled.div`
+  position: relative;
+  display: flex;
+`;
+const HamburgerDiv = styled.div`
+  display: none;
+
+  @media (max-width: 800px) {
+    display: block;
+  }
+`;
+const CloseDiv = styled.div`
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  @media (max-width: 800px) {
+  }
+`;
+
 export default function MainNavBar() {
+  const [open, setOpen] = useState(false);
+
   return (
-    <Ul>
-      <Li>Home</Li>
-      <Li>About</Li>
-      <Li>Contact</Li>
-      <Li>Blog</Li>
-      <Li>Careers</Li>
-    </Ul>
+    <>
+      <Ul>
+        <Li>Home</Li>
+        <Li>About</Li>
+        <Li>Contact</Li>
+        <Li>Blog</Li>
+        <Li>Careers</Li>
+      </Ul>
+      <WrapperDiv>
+        <HamburgerDiv
+          open={open}
+          onClick={() => setOpen(!open)}
+        >
+          <Hamburger />
+        </HamburgerDiv>
+        <CloseDiv open={open}>
+          <Close />
+        </CloseDiv>
+      </WrapperDiv>
+    </>
   );
 }

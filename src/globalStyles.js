@@ -25,7 +25,18 @@ html {
 }
 
 body {
+
+}
+
+h1,h2,h3 {
+  font-weight: var(--fw-reg);
+  line-height: 1.2;
+}
+
+p {
+  color: var(--grayishBlue);
   font-size: 18px;
+  line-height: 1.5;
 }
 `;
 

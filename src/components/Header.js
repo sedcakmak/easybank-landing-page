@@ -20,7 +20,6 @@ const ImageWrapper = styled.div`
   background-position: top -200px right -300px;
   position: relative;
   padding: 20rem;
-  /* overflow: hidden; */
   flex-grow: 1;
   @media (max-width: 800px) {
     background-image: url(${BgMobile});
@@ -34,15 +33,18 @@ const ImageWrapper = styled.div`
 `;
 
 const Overflow = styled.div`
-  overflow-x: hidden;
-  width: 100%;
+  overflow: hidden;
+  width: 90%;
+  height: 830px;
+  @media (max-width: 800px) {
+    height: auto;
+  }
 `;
 
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 53%;
-  line-height: 1.5;
   justify-content: center;
   padding-left: 10rem;
 
@@ -58,20 +60,18 @@ const TextWrapper = styled.div`
 
 const H1 = styled.h1`
   padding: 1rem 12rem 0.5rem;
-  font-weight: var(--fw-reg);
+  font-size: 40px !important;
   margin: -180px;
   @media (max-width: 800px) {
-    padding: 1rem 4rem 0.5rem;
-    line-height: 1.2;
+    padding: 1rem 3rem 0.5rem;
     margin: 0;
   }
 `;
 const P = styled.p`
-  padding: 12rem 1rem 2rem 0;
-  color: var(--grayishBlue);
+  padding: 12rem 1rem 2rem 0.5rem;
+
   @media (max-width: 800px) {
-    padding: 1rem 0 3rem;
-    line-height: 1.5;
+    padding: 1rem 1rem 3rem;
   }
 `;
 

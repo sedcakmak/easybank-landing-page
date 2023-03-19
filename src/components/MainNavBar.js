@@ -2,44 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import { ReactComponent as Hamburger } from "../images/icon-hamburger.svg";
 import { ReactComponent as Close } from "../images/icon-close.svg";
-
-const Ul = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  @media (max-width: 800px) {
-    display: none;
-  }
-`;
-
-const Li = styled.li`
-  color: var(--grayishBlue);
-  padding: 0 1rem;
-  font-size: 16px;
-  /* font-weight: var(--fw-bold); */
-  display: flex;
-  flex-direction: column;
-  &:after {
-    content: "";
-    width: 100%;
-    height: 0.2rem;
-    background: var(--greenToCyanGradient);
-    margin-top: 1.8rem;
-    transform: scale(0);
-    transition: transform 0.2s ease-out;
-  }
-  &:hover {
-    color: var(--darkBlue);
-    cursor: pointer;
-  }
-  &:hover {
-    &::after {
-      transform: scale(1);
-    }
-  }
-`;
+import { useContext } from "react";
+import { MobileContext } from "../App";
+import ReactModal from "react-modal";
+import NavMenu from "./NavMenu";
 
 const WrapperDiv = styled.div`
   position: relative;
@@ -62,29 +28,71 @@ const CloseDiv = styled.div`
   }
 `;
 
+const Modal = styled(ReactModal)`
+  position: absolute;
+  inset: 71px 16px 0px;
+  background: rgb(255, 255, 255);
+  /* overflow: auto; */
+  border-radius: 4px;
+  outline: none;
+  padding: 35px;
+  height: 305px;
+  width: 87%;
+  font-size: 7px;
+  margin: 0 auto;
+`;
+
 export default function MainNavBar() {
+  const mobile = useContext(MobileContext);
   const [open, setOpen] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    //This function tell what should do when clicked open
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    setOpen(true);
+  }
+  function closeModal() {
+    //This function tell what should do when clicked close
+    setIsOpen(false);
+  }
 
   return (
-    <>
-      <Ul>
-        <Li>Home</Li>
-        <Li>About</Li>
-        <Li>Contact</Li>
-        <Li>Blog</Li>
-        <Li>Careers</Li>
-      </Ul>
+    <div>
+      <NavMenu />
+      {mobile && (
+        <>
+          <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal} //what to do after modal open
+            onRequestClose={closeModal}
+            ariaHideApp={false}
+            // style={{
+            //   overlay: {
+            //     background: "var(--grayishBlue)",
+            //     opacity: 0.3,
+            //   },
+            // }}
+          >
+            <NavMenu />
+          </Modal>
+        </>
+      )}
       <WrapperDiv>
         <HamburgerDiv
           open={open}
-          onClick={() => setOpen(!open)}
+          onClick={openModal}
         >
           <Hamburger />
         </HamburgerDiv>
-        <CloseDiv open={open}>
+        <CloseDiv onClick={closeModal}>
           <Close />
         </CloseDiv>
       </WrapperDiv>
-    </>
+    </div>
   );
 }

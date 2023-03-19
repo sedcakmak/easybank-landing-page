@@ -1,3 +1,5 @@
+import { useContext, useEffect } from "react";
+import { MobileContext } from "../App";
 import MainButton from "./MainButton";
 import mockups from "../images/image-mockups.png";
 import styled from "styled-components";
@@ -11,6 +13,8 @@ const WrapperHeader = styled.div`
   align-items: center;
   @media (max-width: 800px) {
     flex-direction: column-reverse;
+    // background: ${({ open }) => (open ? "red" : "blue")};
+    // background: ${(props) => (props.open ? "darkred" : "blue")};
   }
 `;
 
@@ -60,11 +64,12 @@ const TextWrapper = styled.div`
 
 const H1 = styled.h1`
   padding: 1rem 12rem 0.5rem;
-  font-size: 40px !important;
+  font-size: 40px;
   margin: -180px;
   @media (max-width: 800px) {
     padding: 1rem 3rem 0.5rem;
     margin: 0;
+    font-size: 32px;
   }
 `;
 const P = styled.p`
@@ -80,6 +85,9 @@ const Mockup = styled.img`
   bottom: -14rem;
   left: 16rem;
   width: 85%;
+  @media (max-width: 800px) {
+    display: none;
+  }
 
   @media (max-width: 800px) {
     bottom: -1.5rem;
@@ -91,9 +99,14 @@ const Mockup = styled.img`
 `;
 
 export default function Header() {
+  const { mobile, modalIsOpen, setIsOpen, open } = useContext(MobileContext);
   return (
     <>
-      <WrapperHeader>
+      <WrapperHeader
+        modalIsOpen={modalIsOpen}
+        open={open}
+        style={{ border: modalIsOpen && "3px solid green" }}
+      >
         <TextWrapper>
           <H1>Next generation digital banking</H1>
           <P>

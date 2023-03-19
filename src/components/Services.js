@@ -1,5 +1,3 @@
-import { useContext } from "react";
-import { MobileContext } from "../App";
 import styled from "styled-components";
 import { ReactComponent as Api } from "../images/icon-api.svg";
 import { ReactComponent as Onboarding } from "../images/icon-onboarding.svg";
@@ -7,10 +5,8 @@ import { ReactComponent as Budgeting } from "../images/icon-budgeting.svg";
 import { ReactComponent as Online } from "../images/icon-online.svg";
 
 export default function Services() {
-  const mobile = useContext(MobileContext);
-
   return (
-    <Ul mobile={mobile}>
+    <Ul>
       <Li>
         <Online />
         <H3>Online Banking</H3>
@@ -48,18 +44,30 @@ export default function Services() {
 }
 const Ul = styled.ul`
   display: flex;
-  flex-direction: ${({ mobile }) => (mobile ? "column" : "row")};
+  flex-direction: row;
   list-style-type: none;
   padding: 6rem 10rem;
+  @media (max-width: 800px) {
+    padding: 1rem;
+    text-align: center;
+    flex-direction: column;
+  }
+`;
+const Li = styled.li`
+  margin: 0 2.3rem 0 0;
+  @media (max-width: 800px) {
+    width: 100%;
+  }
 `;
 
 const H3 = styled.h3`
   padding: 2rem 0;
 `;
 
-const Li = styled.li`
-  margin: 0 2.3rem 0 0;
-`;
 const P = styled.p`
   font-size: 16px;
+  @media (max-width: 800px) {
+    margin-bottom: 2rem;
+    padding-left: 1rem;
+  }
 `;

@@ -8,6 +8,7 @@ const TextWrapper = styled.div`
   @media (max-width: 800px) {
     padding: 1rem;
     text-align: center;
+    margin-bottom: 2rem;
   }
 `;
 
@@ -21,11 +22,12 @@ const H2 = styled.h1`
 export default function MainText() {
   const mobile = useContext(MobileContext);
   return (
-    <TextWrapper>
+    <TextWrapper mobile={mobile}>
       <H2>Why choose Easybank?</H2>
-      <p>
+      <p style={{ fontSize: mobile && "16px" }}>
         We leverage Open Banking to turn your bank account into your financial
-        hub.{!mobile && <br />} Control your finances like never before.
+        hub. <br />
+        Control your finances like never before.
       </p>
     </TextWrapper>
   );

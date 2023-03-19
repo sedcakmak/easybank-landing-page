@@ -7,6 +7,8 @@ import MainNavBar from "./components/MainNavBar";
 import Header from "./components/Header";
 import MainText from "./components/MainText";
 import Services from "./components/Services";
+import Articles from "./components/Articles";
+import Footer from "./components/Footer";
 
 export const MobileContext = createContext();
 
@@ -28,8 +30,14 @@ const MainWrapper = styled.div`
   padding: 2rem 0;
 `;
 
+const TextSection = styled.div`
+  background-color: var(--lightGrayishBlue);
+`;
+
 function App() {
   const [mobile, setMobile] = useState(window.innerWidth <= 800);
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const handleWindowSizeChange = () => {
     setMobile(window.innerWidth <= 800);
@@ -43,25 +51,32 @@ function App() {
   }, []);
 
   return (
-    <MobileContext.Provider value={mobile}>
+    <MobileContext.Provider value={{ mobile, modalIsOpen, open }}>
       <GlobalStyle />
       <MainWrapper>
         <nav>
           <Navbar>
             <Logo />
-            <MainNavBar />
-            <MainButton />
-            {/* {mobile && <MobileNavBar />} */}
+            <MainNavBar mobile={mobile} />
+            {!mobile && <MainButton />}
           </Navbar>
         </nav>
         <header>
           <Header />
         </header>
         <main>
-          <MainText mobile={mobile} />
-          <Services mobile={mobile} />
+          <TextSection>
+            <MainText mobile={mobile} />
+            <Services />
+          </TextSection>
+          <section>
+            <Articles mobile={mobile} />
+          </section>
         </main>
       </MainWrapper>
+      <footer>
+        <Footer />
+      </footer>
     </MobileContext.Provider>
   );
 }

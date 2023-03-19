@@ -8,11 +8,10 @@ const Button = styled.button`
   padding: 1rem;
   border: none;
   width: 10rem;
-  transition: opacity 0.2s ease-in;
 
   &:hover {
-    opacity: 0.6;
     cursor: pointer;
+    background: var(--lightGreenToCyanGradient);
   }
   /* @media (max-width: 800px) {
     display: none;
